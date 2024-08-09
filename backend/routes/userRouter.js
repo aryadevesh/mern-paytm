@@ -6,7 +6,7 @@ require('dotenv').config();
 
 const {User, Account} = require("../mongoDB"); // Assuming this is your User model
  // Assuming you also have an Account model
-const JWT_SECRET = require("./config");
+const JWT_SECRET = require("./config").default;
 const jwt = require("jsonwebtoken");
 const zod = require("zod");
 
@@ -35,6 +35,7 @@ router.post("/signup", async (req, res) => {
     const dbUser = await User.create(body);
 
     const userId = dbUser._id; // Updated
+    
     await Account.create({
         userId,
         balance: 1 + Math.random() * 10000,
