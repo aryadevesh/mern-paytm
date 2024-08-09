@@ -2,6 +2,7 @@ const express = require("express");
 const userSignupValidation = require("./userRouterTypes");
 const userSigninValidation = require("./userRouterTypes");
 const router = express.Router();
+require('dotenv').config();
 
 const {User, Account} = require("../mongoDB"); // Assuming this is your User model
  // Assuming you also have an Account model
@@ -9,7 +10,7 @@ const JWT_SECRET = require("./config");
 const jwt = require("jsonwebtoken");
 const zod = require("zod");
 
-const { authMiddleware } = require("../middlewares/middleware");
+const authMiddleware = require("../middlewares/middleware");
 
 const updateBody = zod.object({
     password: zod.string().optional(),
