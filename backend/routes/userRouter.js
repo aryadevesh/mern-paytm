@@ -6,7 +6,7 @@ require('dotenv').config();
 
 const {User, Account} = require("../mongoDB"); // Assuming this is your User model
  // Assuming you also have an Account model
-const JWT_SECRET = require("./config").default;
+const JWT_SECRET = require("./config");
 const jwt = require("jsonwebtoken");
 const zod = require("zod");
 
@@ -55,6 +55,7 @@ router.post("/signup", async (req, res) => {
 });
 
 router.post("/signin", async (req, res) => {
+    console.log()
     const body = req.body;
     const { success } = userSigninValidation.safeParse(req.body);
     if (!success) {
@@ -99,31 +100,37 @@ router.put("/", authMiddleware, async (req, res) => {
     });
 });
 
-router.get("/bulk", async (req, res) => {
-    const filter = req.query.filter || "";
-    const users = await User.find({
-        $or: [
-            {
-                firstName: {
-                    $regex: filter,
-                },
-            },
-            {
-                lastName: {
-                    $regex: filter,
-                },
-            },
-        ],
-    });
 
-    res.json({
-        user: users.map((user) => ({
-            username: user.username,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            _id: user._id,
-        })),
-    });
+router.get("/bulk", authMiddleware, async (req, res) => {
+    try {
+        const filter = req.query.filter || "";
+        const users = await User.find({
+            $or: [{
+                firstname: {
+                    "$regex": filter
+                }
+            }, {
+                lastname: {
+                    "$regex": filter
+                }
+            }]
+        });
+
+        res.json({
+            user: users.map(user => ({
+                username: user.username,
+                firstname: user.firstname,
+                lastname: user.lastname,
+                _id: user._id
+            }))
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: "An error occurred while retrieving users",
+            error: error.message
+        });
+    }
 });
+
 
 module.exports = router; // Export the router directly
