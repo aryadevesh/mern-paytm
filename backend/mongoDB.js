@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 // Use environment variables for sensitive data
-const dbUri = process.env.MONGO_URI || "mongodb+srv://devesh:Kirti12@cluster0.vvu8psh.mongodb.net/paytm1";
+const dbUri = process.env.MONGO_URI;
 
 // Connect to MongoDB with error handling
 mongoose.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
