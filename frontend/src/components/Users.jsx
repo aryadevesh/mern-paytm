@@ -13,7 +13,7 @@ export const Users = () => {
     // debouncing effet 
     useEffect(() => {
         const handler = setTimeout(() => {
-            axios.get("http://localhost:3000/api/v1/user/bulk?filter=" + filter)
+            axios.get("https://mern-paytm-8wju.onrender.com/api/v1/user/bulk?filter=" + filter)
                 .then(response => {
                     setUsers(response.data.user);
                 })
