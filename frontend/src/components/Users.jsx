@@ -10,10 +10,16 @@ export const Users = () => {
     const [users, setUsers] = useState([]);
     const [filter, setFilter] = useState("");
     
+    
+
     // debouncing effet 
     useEffect(() => {
         const handler = setTimeout(() => {
-            axios.get("https://mern-paytm-8wju.onrender.com/api/v1/user/bulk?filter=" + filter)
+            axios.get("https://mern-paytm-8wju.onrender.com/api/v1/user/bulk?filter=" + filter, {
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                }
+            })
                 .then(response => {
                     setUsers(response.data.user);
                 })
