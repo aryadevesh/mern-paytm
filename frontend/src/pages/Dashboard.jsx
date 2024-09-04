@@ -1,20 +1,28 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Appbar } from "../components/Appbar";
 import { Balance } from "../components/Balance";
 import { Users } from "../components/Users";
 import axios from "axios";
 
-
-
 export const Dashboard = () => {
     const [balance, setBalance] = useState("Loading...");
+    const navigate = useNavigate();
 
     useEffect(() => {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            // If no token is found, redirect to signin page
+            navigate("/signin");
+            return;
+        }
+
         const fetchBalance = async () => {     
             try {
                 const response = await axios.get("https://mern-paytm-8wju.onrender.com/api/v1/account/balance", {
                     headers: {
-                        'Authorization': `Bearer ${localStorage.getItem("token")}`
+                        'Authorization': `Bearer ${token}`
                     }
                 });
                 setBalance(response.data.balance.toLocaleString());
@@ -23,7 +31,7 @@ export const Dashboard = () => {
             }
         };
         fetchBalance();
-    }, []);
+    }, [navigate]);
 
     return (
         <div>
