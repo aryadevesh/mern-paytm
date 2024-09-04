@@ -20,9 +20,7 @@ export const Appbar = () => {
                 <div className="mr-4">
                     Hello
                 </div>
-                <div className="rounded-full h-12 w-12 bg-slate-200 flex justify-center items-center text-xl mr-4">
-                    U
-                </div>
+                
                 <button
                     onClick={handleSignout}
                     className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 mr-4"
