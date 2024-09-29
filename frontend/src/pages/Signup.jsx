@@ -21,16 +21,16 @@ export const Signup = () => {
         <SubHeading label={"Enter your infromation to create an account"} />
         <InputBox onChange={e => {
           setFirstName(e.target.value);
-        }} placeholder="John" label={"First Name"} />
+        }} placeholder="Go to Signin for Demo" label={"First Name"} />
         <InputBox onChange={(e) => {
           setLastName(e.target.value);
-        }} placeholder="Doe" label={"Last Name"} />
+        }} placeholder="Go to Signin for Demo" label={"Last Name"} />
         <InputBox onChange={e => {
           setUsername(e.target.value);
-        }} placeholder="devesh@gmail.com" label={"Email"} />
+        }} placeholder="Go to Signin for Demo" label={"Email"} />
         <InputBox onChange={(e)  => {
           setPassword(e.target.value)
-        }} placeholder="123456" label={"Password"} />
+        }} placeholder="Go to Signin for Demo" label={"Password"} />
         <div className="pt-4">
           <Button onClick={async () => {
             const response = await axios.post("https://mern-paytm-8wju.onrender.com/api/v1/user/signup", {

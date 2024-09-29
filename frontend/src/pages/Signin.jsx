@@ -36,8 +36,8 @@ export const Signin = () => {
         <div className="rounded-lg bg-white w-80 text-center p-2 h-max px-4">
           <Heading label={"Sign in"} />
           <SubHeading label={"Enter your credentials to access your account"} />
-          <InputBox onChange={e => setUsername(e.target.value)} placeholder="devesh@gmail.com" label={"Email"} />
-          <InputBox onChange={e => setPassword(e.target.value)} placeholder="123456" label={"Password"} />
+          <InputBox onChange={e => setUsername(e.target.value)} placeholder="demo:demo@gmail.com" label={"Email"} />
+          <InputBox onChange={e => setPassword(e.target.value)} placeholder="demo:123456" label={"Password"} />
           {error && <div className="text-red-500 text-sm mt-2">{error}</div>} {/* Display error message */}
           <div className="pt-4">
             <Button onClick={handleSignin} label={"Sign in"} />
